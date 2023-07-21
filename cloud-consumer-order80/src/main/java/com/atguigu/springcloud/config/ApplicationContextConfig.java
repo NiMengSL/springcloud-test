@@ -12,7 +12,7 @@ public class ApplicationContextConfig {
     // 需要在配置文件配置之后，代码中才可以依赖注入
     // 当前文件就是spring的配置文件
     @Bean
-    @LoadBalanced // 让这个RestTemplate在请求时拥有客户端负载均衡的能力  //将此注解注释掉，使用自己的轮询算法不使用默认的
+    @LoadBalanced // 让这个RestTemplate在请求时拥有客户端负载均衡的能力
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
     }

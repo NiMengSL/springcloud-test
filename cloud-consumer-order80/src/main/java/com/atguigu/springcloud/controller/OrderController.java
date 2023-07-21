@@ -2,6 +2,7 @@ package com.atguigu.springcloud.controller;
 
 import com.atguigu.springcloud.entities.CommonResult;
 import com.atguigu.springcloud.entities.Payment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,15 +41,15 @@ public class OrderController {
     //             PAYMENT_URL + "/payment/queryAllByLimit?offset=" + offset + "&limit=" + limit, CommonResult.class);
     // }
     //
-    // @GetMapping("/payment/getForEntity/{id}")
-    // public CommonResult<Payment> getPayment2(@PathVariable("id") Long id) {
-    //     ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
-    //
-    //     if (entity.getStatusCode().is2xxSuccessful()) {
-    //         return entity.getBody();
-    //     } else {
-    //         return new CommonResult<>(444, "操作失败");
-    //     }
-    // }
+    @GetMapping("/payment/getForEntity/{id}")
+    public CommonResult<Payment> getPayment2(@PathVariable("id") Long id) {
+        ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+
+        if (entity.getStatusCode().is2xxSuccessful()) {
+            return entity.getBody();
+        } else {
+            return new CommonResult<>(444, "操作失败");
+        }
+    }
 
 }

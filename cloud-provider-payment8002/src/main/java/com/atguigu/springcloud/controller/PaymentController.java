@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * (Payment)表控制层
@@ -76,21 +77,21 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
-    // @GetMapping("lb")
-    // public String getPaymentLB() {
-    //     return serverPort;
-    // }
-    //
-    // @GetMapping("feign/timeout")
-    // public String getFeignTimeOut() {
-    //     try {
-    //         TimeUnit.SECONDS.sleep(3);
-    //     } catch (InterruptedException e) {
-    //         e.printStackTrace();
-    //     }
-    //     return serverPort;
-    // }
-    //
+    @GetMapping("lb")
+    public String getPaymentLB() {
+        return serverPort;
+    }
+
+    @GetMapping("feign/timeout")
+    public String getFeignTimeOut() {
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return serverPort;
+    }
+
     // /**
     //  * 链路监控
     //  *
