@@ -1,9 +1,12 @@
 package com.atguigu.springcloud;
 
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @author lixiaolong
@@ -30,19 +33,19 @@ public class CloudProviderHystrixPayment8001Application {
      *
      * @return ServletRegistrationBean
      */
-    // @Bean
-    // public ServletRegistrationBean getServlet() {
-    //     HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
-    //     ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
-    //
-    //     // 一启动就加载
-    //     registrationBean.setLoadOnStartup(1);
-    //     // 添加url
-    //     registrationBean.addUrlMappings("/hystrix.stream");
-    //     // 设置名称
-    //     registrationBean.setName("HystrixMetricsStreamServlet");
-    //     return registrationBean;
-    // }
+    @Bean
+    public ServletRegistrationBean<HystrixMetricsStreamServlet> getServlet() {
+        HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+        ServletRegistrationBean<HystrixMetricsStreamServlet> registrationBean = new ServletRegistrationBean<>(streamServlet);
+
+        // 一启动就加载
+        registrationBean.setLoadOnStartup(1);
+        // 添加url
+        registrationBean.addUrlMappings("/hystrix.stream");
+        // 设置名称
+        registrationBean.setName("HystrixMetricsStreamServlet");
+        return registrationBean;
+    }
 
 
 }
