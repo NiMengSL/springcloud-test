@@ -41,4 +41,5 @@ public class MyLogGateWayFilter implements GlobalFilter, Ordered {
         return 0;
     }
 
+  
 }
